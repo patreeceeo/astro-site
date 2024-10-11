@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const { slug } = Astro.params;
-const res = await fetch(`https://innerlogic.co/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
+const res = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
 const posts = await res.json();
 
 export async function getStaticPaths() {
-  const res = await fetch("https://innerlogic.co/wp-json/wp/v2/posts?_fields=slug");
+const res = await fetch("https://innerlogic.co/wp/wp-json/wp/v2/posts?_fields=slug");
   const posts = await res.json();
   return posts.map((post: Post) => ({ params: { slug: post.slug } }));
 }

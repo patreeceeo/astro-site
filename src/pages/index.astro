@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-const res = await fetch("https://innerlogic.co/wp-json/wp/v2/posts?_fields=slug,excerpt,title");
+const res = await fetch("https://innerlogic.co/wp/wp-json/wp/v2/posts?_fields=slug,excerpt,title");
 const posts = await res.json();
 ---
 
