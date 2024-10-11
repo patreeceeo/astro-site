@@ -7,7 +7,7 @@ const posts = await res.json();
 export async function getStaticPaths() {
   const res = await fetch("https://innerlogic.co/wp-json/wp/v2/posts?_fields=slug");
   const posts = await res.json();
-  return posts.map((post) => ({ params: { slug: post.slug } }));
+  return posts.map((post: Post) => ({ params: { slug: post.slug } }));
 }
 ---
 
