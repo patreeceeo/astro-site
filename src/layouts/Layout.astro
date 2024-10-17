@@ -17,10 +17,102 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+    <header>
+      Off the rails
+    </header>
+    <div class="page">
+      <slot />
+    </div>
+    <footer>
+      Still off the rails
+    </footer>
 	</body>
 </html>
+<style>
+  .page {
+    max-width: 800px;
+    margin: 1em auto;
+  }
+</style>
 <style is:global>
+  /* http://meyerweb.com/eric/tools/css/reset/ 
+     v2.0 | 20110126
+       License: none (public domain)
+   */
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed, 
+  figure, figcaption, footer, header, hgroup, 
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  blockquote, q {
+    quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: '';
+    content: none;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  /* End reset */
+
+  /* Fluid unit */
+	:root {
+    --fluid-text-min: 12;
+    --fluid-text-max: 40;
+    --fluid-text-min-width: 640;
+    --fluid-text-max-width: 2050;
+
+    --fluid-text-slope: calc((var(--fluid-text-max) - var(--fluid-text-min)) / (var(--fluid-text-max-width) - var(--fluid-text-min-width)));
+
+    --fluid-text-intercept: calc(var(--fluid-text-max) - (var(--fluid-text-slope) * var(--fluid-text-max-width)));
+
+    --fluid-unit: clamp(calc(var(--fluid-text-min) * 1px), calc(var(--fluid-text-slope) * 100vw + var(--fluid-text-intercept) * 1px), calc(var(--fluid-text-max) * 1px));
+  }
+  /* End fluid unit */
+
+  /* Modular scale */
+  :root {
+    --modular-scale: 1.2;
+    --scale-0: 100%;
+    --scale-1: calc(var(--scale-0) * var(--modular-scale));
+    --scale-2: calc(var(--scale-1) * var(--modular-scale));
+    --scale-3: calc(var(--scale-2) * var(--modular-scale));
+    --scale-4: calc(var(--scale-3) * var(--modular-scale));
+    --scale-5: calc(var(--scale-4) * var(--modular-scale));
+    --scale-6: calc(var(--scale-5) * var(--modular-scale));
+  }
+  /* End modular scale */
+
+  /* Colors */
 	:root {
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
@@ -31,20 +123,64 @@ const { title } = Astro.props;
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
+    background-color: white;
+  }
+  /* End colors */
+
+
+  /* Typography */
+  :root {
+    font-size: 18px;
+    font-size: var(--fluid-unit);
 	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  h1 {
+    font-size: var(--scale-6);
+  }
+  h2 {
+    font-size: var(--scale-5);
+  }
+  h3 {
+    font-size: var(--scale-4);
+  }
+  h4 {
+    font-size: var(--scale-3);
+  }
+  h5 {
+    font-size: var(--scale-2);
+  }
+  h6 {
+    font-size: var(--scale-1);
+  }
+  ol {
+    list-style: decimal;
+  }
+  sup {
+    font-size: 0.8em;
+    position: relative;
+    top: -0.5em;
+  }
+  /* End typography */
+
+
+  /* Spacing */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+  }
+  h1, h2, h3, h4, h5, h6, p, pre {
+    margin-bottom: 0.5em;
+  }
+  p {
+    line-height: 1.5em;
+  }
+
+  pre {
+    overflow: auto;
+  }
+
+  header, footer {
+    padding: 1em;
+    background-color: rgb(var(--accent));
+    color: white;
+  }
+  /* End spacing */
 </style>
