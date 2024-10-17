@@ -18,13 +18,13 @@ const { title } = Astro.props;
 	</head>
 	<body>
     <header>
-      Off the rails
+      <a href="/">Off the rails</a>
     </header>
     <div class="page">
       <slot />
     </div>
     <footer>
-      Still off the rails
+      <a href="/">Still off the rails</a>
     </footer>
 	</body>
 </html>
@@ -119,11 +119,22 @@ const { title } = Astro.props;
 		--accent-dark: 49, 10, 101;
 		--accent-gradient: linear-gradient(
 			45deg,
+      /*
 			rgb(var(--accent)),
+       */
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
     background-color: white;
+  }
+
+  header, footer {
+    background-color: rgb(var(--accent));
+    color: white;
+
+    a {
+      color: white;
+    }
   }
   /* End colors */
 
@@ -159,6 +170,12 @@ const { title } = Astro.props;
     position: relative;
     top: -0.5em;
   }
+
+  header, footer {
+    a {
+      text-decoration: none;
+    }
+  }
   /* End typography */
 
 
@@ -179,8 +196,6 @@ const { title } = Astro.props;
 
   header, footer {
     padding: 1em;
-    background-color: rgb(var(--accent));
-    color: white;
   }
   /* End spacing */
 </style>
