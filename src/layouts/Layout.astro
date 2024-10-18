@@ -30,8 +30,7 @@ const { title } = Astro.props;
 </html>
 <style>
   .page {
-    max-width: 800px;
-    margin: 1em auto;
+    margin: 2em;
   }
 </style>
 <style is:global>
@@ -87,7 +86,7 @@ const { title } = Astro.props;
   /* Fluid unit */
 	:root {
     --fluid-text-min: 12;
-    --fluid-text-max: 40;
+    --fluid-text-max: 96;
     --fluid-text-min-width: 640;
     --fluid-text-max-width: 2050;
 
@@ -119,9 +118,6 @@ const { title } = Astro.props;
 		--accent-dark: 49, 10, 101;
 		--accent-gradient: linear-gradient(
 			45deg,
-      /*
-			rgb(var(--accent)),
-       */
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
