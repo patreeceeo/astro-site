@@ -1,22 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-const res = await fetch("https://innerlogic.co/wp/wp-json/wp/v2/posts?_fields=slug,excerpt,title");
-const posts = await res.json();
+const resPostsPreviews = await fetch("https://innerlogic.co/wp/wp-json/wp/v2/posts?_fields=slug,excerpt,title,id");
+let postPreviews = await resPostsPreviews.json() as PostPreview[];
+
+// Figure out which post is the intro post
+const {id: idIntroPost} = postPreviews.find((post) => post.slug === "intro") as PostPreview;
+const resIntroPost = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/${idIntroPost}?_fields=content`);
+const introPost = await resIntroPost.json() as {content: {rendered: string}};
+
+// Remove the intro post from the list of post previews
+postPreviews = postPreviews.filter((post) => post.slug !== "intro");
 ---
 
 <Layout title="Blog">
-	<main>
-    <p>
-    Engineering helps us get where we're going, but where is that? Is it really as nice as they say? If history is any guide, maybe not.
-    </p>
-
-    <p>
-    <!-- TODO move to CMS -->
-    Hello, I am a bundle of incongrueties and "emotions" commonly known as a human being. As an engineer, I enjoy building theories about how systems are used to achieve a fixed goal, or could be made to do it better. I'm also an (armchair) philosopher who can't help but question that fixed goal. There's also an artist in me doodling in the margins while thinking that both the engineer and the philosopher need to touch grass. Ultimately, I am all and none of these. Worry not, these seemingly distinct identities are actually one, it's just our culture that insists on dividing them.
-    </p>
+  <main set:html={introPost.content.rendered}></main>
     {
-    posts.map((post: Post) => (
+    postPreviews.map((post) => (
       <Card
         title={post.title.rendered}
         body={post.excerpt.rendered}

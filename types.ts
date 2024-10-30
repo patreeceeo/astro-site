@@ -1,5 +1,6 @@
 
-interface Post {
+interface PostPreview {
+  id: number;
   title: {
     rendered: string;
   };
