@@ -3,11 +3,18 @@ import Layout from '../layouts/Layout.astro';
 const { slug } = Astro.params;
 const res = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
 const posts = await res.json();
+const postTitle = posts.length > 0 ? posts[0].title.rendered : 'Post not found';
+const postContent = posts.length > 0 ? posts[0].content.rendered : 'Post not found';
 ---
 
-<Layout title={`${posts[0].title.rendered} | Off the rails`}>
-  <h1>{posts[0].title.rendered}</h1>
-  <main set:html={posts[0].content.rendered}>
-  </main>
+<Layout title={`${postTitle} | Off the rails`}>
+  <h1>{postTitle}</h1>
+  <main set:html={postContent}></main>
 </Layout>
+<style is:global>
+  main img {
+    width: 100% !important;
+    height: auto !important;
+  }
+</style>
 

@@ -1,0 +1,114 @@
+---
+import discordIcon from '../assets/icons/discord.png';
+import githubIcon from '../assets/icons/github.png';
+import linkedinIcon from '../assets/icons/linkedin.png';
+import instagramIcon from '../assets/icons/instagram.png';
+import itchioIcon from '../assets/icons/itch.png';
+import {Image} from 'astro:assets';
+
+function getCssUrl(icon) {
+  return `url(${icon.src})`;
+}
+
+const styleVars = {
+  discordIcon: getCssUrl(discordIcon),
+  githubIcon: getCssUrl(githubIcon),
+  linkedinIcon: getCssUrl(linkedinIcon),
+  instagramIcon: getCssUrl(instagramIcon),
+  itchioIcon: getCssUrl(itchioIcon)
+}
+
+const socialMediaLinks = [
+  {
+    name: 'Discord',
+    url: 'https://discordapp.com/users/428199465367633940',
+    classNames: 'discord'
+  },
+  {
+    name: 'GitHub',
+    url: 'https://github.com/patreeceeo',
+    classNames: 'github'
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://linkedin.com/in/patrick-lee-canfield',
+    classNames: 'linkedin'
+  },
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/patreeceeo',
+    classNames: 'instagram'
+  },
+  {
+    name: 'itch.io',
+    url: 'https://patreeceeo.itch.io',
+    classNames: 'itchio'
+  }
+];
+
+---
+<!-- Social media links -->
+<ul class="list">
+  {socialMediaLinks.map((link) => (
+    <li>
+      <a class={`link ${link.classNames}`} href={link.url}>&nbsp;<span>{link.name}</span></a>
+    </li>
+  ))}
+</ul>
+<style define:vars={styleVars}>
+  .list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 0 1 auto;
+
+    li {
+      margin: 0 0.5rem;
+      flex: 1 1 auto;
+    }
+  }
+  .link {
+    filter: invert(1);
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.discord {
+      background-image: var(--discordIcon);
+    }
+    &.github {
+      background-image: var(--githubIcon);
+    }
+    &.linkedin {
+      background-image: var(--linkedinIcon);
+    }
+    &.instagram {
+      background-image: var(--instagramIcon);
+    }
+    &.itchio {
+      background-image: var(--itchioIcon);
+    }
+
+    span {
+      display: none;
+    }
+    &:hover {
+      background-image: none;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 0;
+      }
+  }
+
+</style>

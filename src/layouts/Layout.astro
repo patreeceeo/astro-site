@@ -1,4 +1,6 @@
 ---
+import Socials from '../components/Socials.astro';
+
 interface Props {
 	title: string;
 }
@@ -18,19 +20,71 @@ const { title } = Astro.props;
 	</head>
 	<body>
     <header>
-      <a href="/">Off the rails</a>
+      <div class="inner">
+        <a href="/">InnerLogic.co</a>
+      </div>
     </header>
     <div class="page">
       <slot />
     </div>
+    <article class="page">
+      <h1 class="small">Credits | icons from Flaticon</h1>
+      <ul class="small">
+        <li class="inline">
+          <a href="https://www.flaticon.com/free-icons/discord" title="discord icons">Discord icons created by Aldo Cervantes</a>
+        </li>
+        <li class="inline">
+          <a href="https://www.flaticon.com/free-icons/github" title="github icons">Github icons created by Picons</a>
+        </li>
+        <li class="inline">
+          <a href="https://www.flaticon.com/free-icons/linkedin" title="linkedin icons">Linkedin</a> &amp; <a href="https://www.flaticon.com/free-icons/instagram" title="instagram icons">Instagram</a> icon by Freepik
+        </li>
+      </ul>
+    </article>
     <footer>
-      <a href="/">Still off the rails</a>
+      <div class="inner">
+        <a href="/">&hellip;still InnerLogic.co</a>
+        <Socials />
+      </div>
     </footer>
 	</body>
 </html>
 <style>
+  header, footer {
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    a {
+      flex-shrink: 0;
+    }
+  }
+  .page, header .inner, footer .inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--page-width);
+  }
   .page {
-    margin: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .small {
+    font-size: 0.75em;
+    line-height: 1em;
+  }
+  h1.small {
+    text-transform: uppercase;
+  }
+
+  .inline {
+    display: inline;
   }
 </style>
 <style is:global>
@@ -86,7 +140,7 @@ const { title } = Astro.props;
   /* Fluid unit */
 	:root {
     --fluid-text-min: 12;
-    --fluid-text-max: 96;
+    --fluid-text-max: 48;
     --fluid-text-min-width: 640;
     --fluid-text-max-width: 2050;
 
@@ -176,6 +230,9 @@ const { title } = Astro.props;
 
 
   /* Spacing */
+  :root {
+    --page-width: calc(min(1600px, 100vw - 4em));
+  }
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5em;
   }
