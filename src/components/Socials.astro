@@ -4,9 +4,8 @@ import githubIcon from '../assets/icons/github.png';
 import linkedinIcon from '../assets/icons/linkedin.png';
 import instagramIcon from '../assets/icons/instagram.png';
 import itchioIcon from '../assets/icons/itch.png';
-import {Image} from 'astro:assets';
 
-function getCssUrl(icon) {
+function getCssUrl(icon: { src: string }) {
   return `url(${icon.src})`;
 }
 
