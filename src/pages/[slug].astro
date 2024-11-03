@@ -4,13 +4,9 @@ console.log("Astro.params", Astro.params);
 const { slug } = Astro.params;
 const res = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
 const posts = await res.json();
-const postTitle = posts.length > 0 ? posts[0].title.rendered : 'Post not found';
-const postContent = posts.length > 0 ? posts[0].content.rendered : 'Post not found';
-if(posts.length === 0) {
-console.error(`PostNotFound for slug "${slug}"`);
-} else {
-  console.log(`Post found for slug "${slug}"`);
-}
+const hasPost = posts.length > 0;
+const postTitle = hasPost ? posts[0].title.rendered : 'Post not found';
+const postContent = hasPost ? posts[0].content.rendered : "We're looking for the post you requested. Please check back later.";
 ---
 
 <Layout title={`${postTitle} | Off the rails`}>
