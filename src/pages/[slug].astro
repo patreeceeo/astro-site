@@ -1,5 +1,4 @@
 ---
-import {SITE_NAME} from '../constants';
 import Layout from '../layouts/Layout.astro';
 const { slug } = Astro.params;
 const res = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
@@ -9,7 +8,7 @@ const postTitle = hasPost ? posts[0].title.rendered : 'Post not found';
 const postContent = hasPost ? posts[0].content.rendered : "We're looking for the post you requested. Please check back later.";
 ---
 
-<Layout title={`${postTitle} | ${SITE_NAME}`}>
+<Layout title={postTitle}>
   <h1>{postTitle}</h1>
   <main set:html={postContent}></main>
 </Layout>
