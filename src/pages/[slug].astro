@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+console.log("Astro.params", Astro.params);
 const { slug } = Astro.params;
 const res = await fetch(`https://innerlogic.co/wp/wp-json/wp/v2/posts/?slug=${slug},_fields=title,content`);
 const posts = await res.json();
