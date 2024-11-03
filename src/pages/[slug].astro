@@ -1,4 +1,5 @@
 ---
+import {SITE_NAME} from '../constants';
 import Layout from '../layouts/Layout.astro';
 console.log("Astro.params", Astro.params);
 const { slug } = Astro.params;
@@ -9,7 +10,7 @@ const postTitle = hasPost ? posts[0].title.rendered : 'Post not found';
 const postContent = hasPost ? posts[0].content.rendered : "We're looking for the post you requested. Please check back later.";
 ---
 
-<Layout title={`${postTitle} | Off the rails`}>
+<Layout title={`${postTitle} | ${SITE_NAME}`}>
   <h1>{postTitle}</h1>
   <main set:html={postContent}></main>
 </Layout>
